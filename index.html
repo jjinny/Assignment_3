@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="Back4App Inc" name="author">
+
+  <title>Sample App| JavaScript Quickstart | Back4App</title>
+
+  <!-- Import here your JavaScript SDK -->
+  <script src="https://unpkg.com/parse/dist/parse.min.js"></script>
+
+</head>
+
+<body>
+  <div>
+    <header>
+      <!-- Add your header image here -->
+    </header>
+
+    <h3>Hello World!</h3>
+    <!-- Add your content here -->
+
+
+    <script>
+      Parse.initialize("Np3QvJwVRMD2PdJkPXUNPQBVULYAo0utGLuLoDDg", "MwdlJY6zyManksjDO2OrrBlQcGpCBH7YVblT2ScM"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR Javascript KEY
+      Parse.serverURL = "https://parseapi.back4app.com/";
+      // PASTE YOUR TEST CODE HERE
+      //var user = new Parse.User();
+      //user.save({
+       // username: 'sampeusername',
+        //email: 'sample@email.com',
+       // password: '123456'
+     // }, {
+        //success: function(response) {
+          //alert('New object create with success! ObjectId: ' + response.id + `, ` + user.get('username'));
+        //},
+       // error: function(response, error) {
+          //alert('Erro: ' + error.message);
+        //}
+     // });
+     // Get Parse objects with known class name, unknown id, in descending order
+     var allFacebookPosts = Parse.Object.extend("FacebookPost");
+     var query = new Parse.Query(allFacebookPosts);
+     query.descending("createdAt");
+     
+     query.find({
+                success: function(results) {
+                
+                alert("Successfully retrieved " + results.length + " FacebookPosts.");
+                
+                for (var i = 0; i < results.length; i++) {
+                
+                var object = results[i];
+                
+                // Get Properties out of this object
+                var textdescription = object.get("comment");
+                
+                var imageO = object.get("imageFile");
+                var imageURL = imageO.url();
+                
+                
+                var img = document.createElement("img");
+                img.src = imageURL;
+                img.width = 300;
+                img.height = 300;
+                
+                var t = document.createTextNode(textdescription);
+                document.body.appendChild(t);
+                
+                document.body.appendChild(img);
+                
+                
+                }
+                }});
+    </script>
+
+  </div>
+
+  <br><br><br>
+
+  <footer>
+    <!-- Add your footer message/logo here -->
+  </footer>
+
+  <!-- Add your JS script here -->
+
+</body>
+
+</html>
